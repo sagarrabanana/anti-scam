@@ -5,24 +5,32 @@ import csv
 
 cont=0
 veces=0
-nombresList=[]
-apellidosList=[]
+
+
+f = open("nombres.csv","r")
+dt = csv.reader(f)
+nombres = list(dt)
+f.close()
+
+p = open("apellidos.csv","r")
+dp = csv.reader(p)
+apellidos = list(dp)
+p.close()
+
 
 while True:
+  nombresList=[]
+  apellidosList=[]
+  for x in nombres:
 
-  with open('/content/nombres.csv', newline='') as nombres:
-    for x in csv.reader(nombres):
+    nombresList.append(x[0].capitalize())
 
-      #cont=cont+1
-      nombresList.append(x[0].capitalize())
-
-  name=nombresList[random.randint(1,26000)]
+  name=nombresList[random.randint(1,9000)]
   print(name)
 
-  with open('/content/apellidos.csv', newline='') as apellidos:
-    for x in csv.reader(apellidos):
-      #cont=cont+1
-      apellidosList.append(x[0].capitalize())
+  for x in apellidos:
+
+    apellidosList.append(x[0].capitalize())
   surname=apellidosList[random.randint(1,25000)]
   print(surname)
   numb=random.randint(600000000,729999999)
@@ -82,7 +90,6 @@ while True:
   'url_params': '',
   }
   urlObj=url[random.randint(0,len(url)-1)]
-  response=requests.post(urlObj,data=data)#.text
+  response=requests.post(urlObj,data=data)
   print(urlObj)
   print('Respuesta: '+ str(response.status_code))
-  #print(response)
